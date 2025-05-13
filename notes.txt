@@ -1,0 +1,38 @@
+---------------------- 1. Rendering All Movies ----------------------
+const movieListSection = document.getElementById('movie-list-container');
+
+function renderAllMovies(movieList) {
+    movieList.forEach((movie) => {
+        const movieCard = `
+            <div class="movie-card">
+                <div class="movie-banner">
+                    <img src="${movie?.image}" width="240" height="140">
+                </div>
+                <div class="movie-title">
+                    <h2>${movie?.name}</h2>
+                </div>
+                <div class="movie-description">
+                    <p>${movie?.description}</p>
+                </div>
+                <div class="movie-genre">
+                    <b>Genre:</b> <text>${movie?.genre}</text>
+                </div>
+                <div class="movie-release-year">
+                    <b>Release Year:</b> <text>${movie?.releaseYear}</text>
+                </div>
+                <div class="movie-rating">
+                    <b>Rating:</b><span class="star-rating">${movie?.rating}</span>
+                </div>
+                <div class="movie-actions">
+                    <button>Details</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+        `;
+        movieListSection.insertAdjacentHTML('beforeend', movieCard);
+    });
+}
+
+renderAllMovies(movies);
+
+//beforeend: insert it before the end of end tag.
