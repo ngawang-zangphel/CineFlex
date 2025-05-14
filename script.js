@@ -2,7 +2,7 @@
 
 /***********************************************
  * LIST OF EXISTING MOVIES
- ***********************************************/
+**********************************************/
 const descContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.';
 
 const movies = [
@@ -66,7 +66,7 @@ function renderAllMovies(movieList) {
                     <img src="${movie?.image}" width="240" height="140">
                 </div>
                 <div class="movie-title">
-                    <h2>${movie?.name}</h2>
+                    <h2>${formatMovieName(movie?.name)}</h2>
                 </div>
                 <div class="movie-description">
                     <p>${movie?.description}</p>
@@ -91,3 +91,19 @@ function renderAllMovies(movieList) {
 }
 
 renderAllMovies(movies);
+
+/***********************************************
+ * Format Movie Name
+ ***********************************************/
+function formatMovieName(name) {
+    //Get all the words in the Movie Name
+    const movieNameWords = name.split(' ');
+    const formmatedWordArray = movieNameWords.map((word) => {
+        //at-> return index character from that string
+        // substring -> returns the value from given index till end
+        const fChar = word.at(0).toUpperCase();   
+        const restChar = word.substring(1).toLowerCase();
+        return fChar + restChar;
+    });
+    return formmatedWordArray.join(' ');
+}
