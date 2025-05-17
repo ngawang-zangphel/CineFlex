@@ -158,10 +158,6 @@ function displayStarRatings(rating) {
 
 /***********************************************
  * Default Image URL
- * Methods:
- * 1. sort:
- *  - swap current and next item then return positive number else if not then negative number
- *  - modify original array
  ***********************************************/
 function displayMovieBanner(image) {
     return image || './image/not-found-image.jpg';
@@ -169,6 +165,10 @@ function displayMovieBanner(image) {
 
 /***********************************************
  * Sort Movie List based on RATING or RELEASE YEAR
+ * * Methods:
+ * 1. sort:
+ *  - swap current and next item then return positive number else if not then negative number
+ *  - modify original array
 ***********************************************/
 document.getElementById('sort-movie-by-rating').addEventListener('click', sortMoviesByRating);
 document.getElementById('sort-movie-by-release-year').addEventListener('click', sortMoviesByReleaseYear);
@@ -193,4 +193,17 @@ function sortMoviesByReleaseYear() {
     sortAccending = !sortAccending;
     //Re-render the UI with sorted movies.
     renderAllMovies(movies);
+}
+
+/***********************************************
+ * Search Movie By Name
+ * Methods:
+ *  1. filter
+ *  2. Includes
+***********************************************/
+document.getElementById('search-movie-btn').addEventListener('click', searchMovies);
+function searchMovies() {
+    const searchText = document.getElementById('search-movie-input')?.value;
+    const searchedMovies = movies.filter(movie => movie?.name?.toLowerCase().includes(searchText));
+    renderAllMovies(searchedMovies);
 }
