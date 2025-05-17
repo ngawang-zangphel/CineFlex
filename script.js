@@ -80,7 +80,7 @@ function renderAllMovies(movieList) {
                     <b>Release Year:</b> <text>${movie?.releaseYear}</text>
                 </div>
                 <div class="movie-rating">
-                    <b>Rating:</b><span class="star-rating">${movie?.rating}</span>
+                    <b>Rating:</b><span class="star-rating">${displayStarRatings(movie?.rating)}</span>
                 </div>
                 <div class="movie-actions">
                     <button>Details</button>
@@ -132,4 +132,27 @@ function formatGenre(genres) {
     return genres.flatMap((genre) => {
         return ' ' + genre.at(0).toUpperCase() + genre.slice(1).toLowerCase();
     })
+}
+
+/***********************************************
+ * Display Movie Ratings to show star instead of numbers
+ *  * Methods: 
+ * 1. Substring
+ * 2. Flatmap: 
+ ***********************************************/
+function displayStarRatings(rating) {
+    if (typeof rating !== "number" || rating < 0 || rating > 5) {
+        console.log("Invalid Rating;");
+        return '';
+    }
+
+    let starString = '';
+    for(let i = 0; i < 5; i++) {
+        if (i < rating) {
+            starString += '\u2605'; //unit code for filled stars
+        } else {
+            starString += '\u2606'; //unit code for filled stars
+        }
+    };
+    return starString;
 }
