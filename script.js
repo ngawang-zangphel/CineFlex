@@ -86,7 +86,7 @@ function renderAllMovies(movieList) {
                 </div>
                 <div class="movie-actions">
                     <button onclick="showMovieDetails(${movie?.id})">Details</button>
-                    <button>Delete</button>
+                    <button onclick="deleteMovie(${movie?.id})">Delete</button>
                 </div>
             </div>
         `;
@@ -277,4 +277,27 @@ function showMovieDetailsModal() {
 
 function hideMovieDetailsModal() {
     document.getElementById('movie-detail-section').classList.add('hidden');
+}
+
+/***********************************************
+ * Delete Movie from Movies Array
+ *  show confirm window to see if he really wants to delete or not.
+ * Methods:
+ *  1. find
+ *      - returns first matching element.
+ * 2. Splice
+ *      - modifies original array
+ * 3. findIndex
+ *      - index of an item
+***********************************************/
+function deleteMovie(id) {
+    const movieToDelete = movies.find(movie => movie?.id === id);
+    const message = `Do you really want to delete movie: '${movieToDelete?.name}'`;
+    let toDelete = confirm(message);
+
+    if (toDelete) {
+        let index = movies.findIndex(movie => movie?.id === id);
+        movies.splice(index, 1);
+        renderAllMovies(movies);
+    };
 }
