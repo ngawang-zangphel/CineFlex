@@ -65,7 +65,7 @@ function renderAllMovies(movieList) {
         const movieCard = `
             <div class="movie-card">
                 <div class="movie-banner">
-                    <img src="${movie?.image}" width="240" height="140">
+                    <img src="${displayMovieBanner(movie?.image)}" width="240" height="140">
                 </div>
                 <div class="movie-title">
                     <h2>${formatMovieName(movie?.name)}</h2>
@@ -136,9 +136,6 @@ function formatGenre(genres) {
 
 /***********************************************
  * Display Movie Ratings to show star instead of numbers
- *  * Methods: 
- * 1. Substring
- * 2. Flatmap: 
  ***********************************************/
 function displayStarRatings(rating) {
     if (typeof rating !== "number" || rating < 0 || rating > 5) {
@@ -155,4 +152,11 @@ function displayStarRatings(rating) {
         }
     };
     return starString;
+}
+
+/***********************************************
+ * Default Image URL
+ ***********************************************/
+function displayMovieBanner(image) {
+    return image || './image/not-found-image.jpg';
 }
