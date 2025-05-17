@@ -207,3 +207,21 @@ function searchMovies() {
     const searchedMovies = movies.filter(movie => movie?.name?.toLowerCase().includes(searchText));
     renderAllMovies(searchedMovies);
 }
+
+/***********************************************
+ * Filter by Genre
+ * Methods:
+ *  1. filter
+ *  2. Includes
+***********************************************/
+function filterByGenre(selectedRadioButton) {
+    const selectedGenre = selectedRadioButton?.value;
+    let filteredMovies = [];
+    if (selectedGenre === 'all') {
+        filteredMovies = movies;
+    } else {
+        filteredMovies = movies.filter(movie => movie?.genre?.includes(selectedGenre));
+    };
+    renderAllMovies(filteredMovies);
+
+}

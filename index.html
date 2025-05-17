@@ -50,15 +50,16 @@
     <section class="filter-by-genre">
       <div class="filter-movie">
         <b style="margin-top: 5px;">Filter by Genre: </b> &nbsp &nbsp
-        <input type="radio" name="genre" value="all">
+        <!-- this will point to this radio button -->
+        <input type="radio" name="genre" value="all" onclick="filterByGenre(this)">
         <label for="html">All</label>
-        <input type="radio" name="genre" value="action">
+        <input type="radio" name="genre" value="action" onclick="filterByGenre(this)">
         <label for="html">Action</label>
-        <input type="radio" name="genre" value="scifi">
+        <input type="radio" name="genre" value="scifi" onclick="filterByGenre(this)">
         <label for="css">Sci Fi</label>
-        <input type="radio" name="genre" value="drama">
+        <input type="radio" name="genre" value="drama" onclick="filterByGenre(this)">
         <label for="javascript">Drama</label>
-        <input type="radio" name="genre" value="comedy">
+        <input type="radio" name="genre" value="comedy" onclick="filterByGenre(this)">
         <label for="javascript">Comedy</label>
       </div>
     </section>
