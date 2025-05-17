@@ -55,6 +55,8 @@ const movies = [
 
 /***********************************************
  * Rendering All Movies inside movie-list-container in the UI
+ *  * Methods: 
+ * 1. Foreach
  ***********************************************/
 const movieListSection = document.getElementById('movie-list-container');
 
@@ -69,10 +71,10 @@ function renderAllMovies(movieList) {
                     <h2>${formatMovieName(movie?.name)}</h2>
                 </div>
                 <div class="movie-description">
-                    <p>${movie?.description}</p>
+                    <p>${formatMovieDescription(movie?.description)}</p>
                 </div>
                 <div class="movie-genre">
-                    <b>Genre:</b> <text>${movie?.genre}</text>
+                    <b>Genre:</b> <text>${formatGenre(movie?.genre)}</text>
                 </div>
                 <div class="movie-release-year">
                     <b>Release Year:</b> <text>${movie?.releaseYear}</text>
@@ -94,6 +96,13 @@ renderAllMovies(movies);
 
 /***********************************************
  * Format Movie Name
+ *  * Methods: 
+ * 1. Map
+ * 2. Splot.
+ * 3. At
+ * 4. Substring
+ * 5. Join
+ * 6. toUpperCase and toLowerCase
  ***********************************************/
 function formatMovieName(name) {
     //Get all the words in the Movie Name
@@ -106,4 +115,21 @@ function formatMovieName(name) {
         return fChar + restChar;
     });
     return formmatedWordArray.join(' ');
+}
+
+/***********************************************
+ * Format Movie Description by showing first 100 character on starting
+ *  * Methods: 
+ * 1. Substring
+ * 2. Flatmap: 
+ *  - calls map method on that array to transform and then flat method to flatten the array
+ ***********************************************/
+function formatMovieDescription(desc) {
+    return desc.substring(0, 100).concat('...');
+}
+
+function formatGenre(genres) {
+    return genres.flatMap((genre) => {
+        return ' ' + genre.at(0).toUpperCase() + genre.slice(1).toLowerCase();
+    })
 }
