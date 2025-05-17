@@ -301,3 +301,53 @@ function deleteMovie(id) {
         renderAllMovies(movies);
     };
 }
+
+/***********************************************
+ * Create a movie
+ * Methods:
+ *  1. 
+***********************************************/
+document.getElementById('create-movie-form').addEventListener('submit', createMovie);
+
+function createMovie(event) {
+    event.preventDefault();
+    let newMovie = {};
+    newMovie = readFormData(newMovie);
+    movies.push(newMovie);
+    hideCreateMovieModal();
+    renderAllMovies(movies);
+}
+
+function readFormData(movie) {
+    movie.name = readInputFieldValue('name');
+    movie.description = readInputFieldValue('desc');
+    movie.rating = +readInputFieldValue('rating');
+    movie.releaseYear = +readInputFieldValue('releaseYear');
+    movie.genre = getSelectedCheckboxValue('genre');
+    return movie;
+}
+
+function getSelectedCheckboxValue(elementName) {
+    const selectedValue = [];
+    const checkboxes = document.getElementsByName(elementName);
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            selectedValue.push(checkbox?.value);
+        };
+    })
+    return selectedValue;
+}
+
+function readInputFieldValue(id) {
+    return document.getElementById(id).value;
+}
+
+function showCreateMovieModal() {
+    // since using className to select and not id
+    document.querySelector('.create-movie-section').classList.remove('hidden');
+}
+
+function hideCreateMovieModal() {
+    // since using className to select and not id
+    document.querySelector('.create-movie-section').classList.add('hidden');
+}

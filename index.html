@@ -20,7 +20,7 @@
         <h1>Cineflix</h1>
       </div>
       <div class="header-menu">
-        <button id="create-new-movie-btn">Create Movie</button>
+        <button id="create-new-movie-btn" onclick="showCreateMovieModal()">Create Movie</button>
       </div>
     </header>
 
@@ -145,7 +145,7 @@
     <section class="create-movie-section hidden">
       <div id="myModal" class="overlay">
         <div class="modal-content" id="modal-content">
-          <span class="close">&times;</span>
+          <span class="close" onclick="hideCreateMovieModal()">&times;</span>
 
           <div class="create-movie-form">
             <div class="create-movie-header-div">
