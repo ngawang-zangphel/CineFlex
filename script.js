@@ -85,11 +85,12 @@ function renderAllMovies(movieList) {
                     <b>Rating:</b><span class="star-rating">${displayStarRatings(movie?.rating)}</span>
                 </div>
                 <div class="movie-actions">
-                    <button>Details</button>
+                    <button onclick="showMovieDetails(${movie?.id})">Details</button>
                     <button>Delete</button>
                 </div>
             </div>
         `;
+        // Passing directly movie will return as movie is an object and html knows simple type only such as string, numeric
         movieListSection.insertAdjacentHTML('beforeend', movieCard);
     });
 }
@@ -224,4 +225,55 @@ function filterByGenre(selectedRadioButton) {
     };
     renderAllMovies(filteredMovies);
 
+}
+
+/***********************************************
+ * Show Movie Details
+ * Methods:
+ *  1. find
+ *      - returns first matching element.
+***********************************************/
+
+function showMovieDetails(movieId) {
+    showMovieDetailsModal();
+
+     let selectedMovie = movies.find((movie) => movie?.id === movieId);
+    let movieDetailHTML = `
+        <div class="selected-movie-details">
+            <div class="selected-movie-image">
+                <img src="${displayMovieBanner(selectedMovie?.image)}" width="100%" height="240">
+            </div>
+            <div class="selected-movie-name">
+                <h2>${formatMovieName(selectedMovie?.name)}</h2>
+            </div>
+            <div class="selected-movie-description">
+                <p>${formatMovieDescription(selectedMovie?.description)}</p>
+            </div>
+            <div class="selected-movie-other-details">
+                <div class="selected-movie-release">
+                    <b>Release Year: </b>
+                    <text>${selectedMovie?.releaseYear}</text>
+                </div>
+                <div class="selected-movie-rating">
+                    <b>Rating: (${selectedMovie?.rating})</b>
+                    <text class="star-rating">${displayStarRatings(selectedMovie?.rating)}</text>
+                </div>
+            </div>
+            <div class="selected-movie-genre">
+                <b>Genre:</b>
+                <text>${formatGenre(selectedMovie?.genre)}</text>
+            </div>
+        </div>
+    `;
+
+    const container = document.getElementById('selected-movie-detail-container');
+    container.insertAdjacentHTML('beforeend', movieDetailHTML);
+}
+
+function showMovieDetailsModal() {
+    document.getElementById('movie-detail-section').classList.remove('hidden');
+}
+
+function hideMovieDetailsModal() {
+    document.getElementById('movie-detail-section').classList.add('hidden');
 }
