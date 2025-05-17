@@ -267,6 +267,7 @@ function showMovieDetails(movieId) {
     `;
 
     const container = document.getElementById('selected-movie-detail-container');
+    container.innerHTML = '';
     container.insertAdjacentHTML('beforeend', movieDetailHTML);
 }
 
