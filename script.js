@@ -61,6 +61,8 @@ const movies = [
 const movieListSection = document.getElementById('movie-list-container');
 
 function renderAllMovies(movieList) {
+    //Remove the previous values and display new contents to prevent duplication.
+    movieListSection.innerHTML = '';
     movieList.forEach((movie) => {
         const movieCard = `
             <div class="movie-card">
@@ -156,7 +158,39 @@ function displayStarRatings(rating) {
 
 /***********************************************
  * Default Image URL
+ * Methods:
+ * 1. sort:
+ *  - swap current and next item then return positive number else if not then negative number
+ *  - modify original array
  ***********************************************/
 function displayMovieBanner(image) {
     return image || './image/not-found-image.jpg';
+}
+
+/***********************************************
+ * Sort Movie List based on RATING or RELEASE YEAR
+***********************************************/
+document.getElementById('sort-movie-by-rating').addEventListener('click', sortMoviesByRating);
+document.getElementById('sort-movie-by-release-year').addEventListener('click', sortMoviesByReleaseYear);
+
+let sortAccending = true;
+function sortMoviesByRating() {
+    if (sortAccending) {
+        movies.sort((curr, next) => curr?.rating - next?.rating);
+    } else {
+        movies.sort((curr, next) => next?.rating - curr?.rating);
+    };
+    sortAccending = !sortAccending;
+    //Re-render the UI with sorted movies.
+    renderAllMovies(movies);
+}
+function sortMoviesByReleaseYear() {
+    if (sortAccending) {
+        movies.sort((curr, next) => curr?.releaseYear - next?.releaseYear);
+    } else {
+        movies.sort((curr, next) => next?.releaseYear - curr?.releaseYear);
+    };
+    sortAccending = !sortAccending;
+    //Re-render the UI with sorted movies.
+    renderAllMovies(movies);
 }
